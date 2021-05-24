@@ -49,6 +49,26 @@ private
     end
   end
 
+  def after_square_bracket
+    if @this_line.include?('[')
+      @this_line2 = @this_line.split("\"")
+      @this_line2.each_with_index do |split, i|
+
+        if split.include?('[')
+      
+         @error_messages.push(["New line expected after '['", @line_number]) if split[split.index('[') + 1] != "\n"
+        end
+      end
+    end
+    if @this_line.include? '],'
+      @error_messages.push(["Empty line is expected after '],'", @line_number]) unless @this_line[@this_line.index(']') + 1] == "\n" || @this_line[@this_line.index(']') + 1] == ',' 
+    end
+ end
+
+ 
+
+
+
 
 
 
