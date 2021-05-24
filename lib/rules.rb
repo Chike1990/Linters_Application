@@ -78,7 +78,6 @@ class Rules
 
   def indentation
     @this_line2 = @this_line.split('"')
-    # p @this_line2
     @error_messages.push(['Use spaces insted of tab', @line_number]) if @this_line2.include?("\t\t")
     if @this_line.include?('{') || @this_line.include?('}')
       if count_spaces(@this_line).positive?
