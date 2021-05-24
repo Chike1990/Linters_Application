@@ -38,6 +38,12 @@ private
     end
   end
 
+  #   if @this_line.include? ':'
+  #     @error_messages.push(["Space is expected after ':'", @line_number]) unless @this_line[@this_line.index(':') + 1] == " "
+  #   end
+
+
+
   def after_comma
     if @this_line.include? ','
       @this_line2 = @this_line.split("\"")
@@ -66,57 +72,54 @@ private
  end
 
 
- def before_curly
-  if @this_line.include? '}'
-    before_split = @this_line[@this_line.index('}') - 1]
-    @error_messages.push(["New empty line expected before '}'", @line_number]) unless before_split == "\n" || before_split == " "
-  end
-end
-
-def indentation
-  
-  @this_line2 = @this_line.split("\"")
-  # p @this_line2
-  if @this_line2.include?("		")
-    @error_messages.push(["Use spaces insted of tab", @line_number])
-  end
-  if @this_line.include?("{") || @this_line.include?("}")
-    if  count_spaces(@this_line) > 0
-     @error_messages.push(["Indentation 0 is expected for '{' and '} ", @line_number])
-   end
-  elsif @this_line.include?("[") || @this_line.include?("]")
-   
-    if  count_spaces(@this_line) != 2
-     @error_messages.push(["Indentation 2 is expected for '[' and '] insted of #{count_spaces(@this_line)}", @line_number])
-   end
- 
-  elsif @this_line == " \n"
-  if count_spaces(@this_line) != 0
-    @error_messages.push(["Indentation 0 is expected for empty lines insted of #{count_spaces(@this_line)}", @line_number])
-  end
- elsif @this_line != "\n"
-  @this_line
-  if count_spaces(@this_line) != 4
-    @error_messages.push(["Indentation 4 is expected for strings insted of #{count_spaces(@this_line)}", @line_number])
-  end
-end
-end
-
-def count_spaces(line)
-  line=line.split("")
- count = 0
-  line.each do |crt|
-    if crt == (' ') || crt == ("		")
-      count += 1
-    else
-      return count
+  def before_curly
+    if @this_line.include? '}'
+      before_split = @this_line[@this_line.index('}') - 1]
+      @error_messages.push(["New empty line expected before '}'", @line_number]) unless before_split == "\n" || before_split == " "
     end
   end
-  count
-end
 
+  def indentation
+    
+    @this_line2 = @this_line.split("\"")
+    # p @this_line2
+    if @this_line2.include?("		")
+      @error_messages.push(["Use spaces insted of tab", @line_number])
+    end
+    if @this_line.include?("{") || @this_line.include?("}")
+      if  count_spaces(@this_line) > 0
+       @error_messages.push(["Indentation 0 is expected for '{' and '} ", @line_number])
+     end
+    elsif @this_line.include?("[") || @this_line.include?("]")
+     
+      if  count_spaces(@this_line) != 2
+       @error_messages.push(["Indentation 2 is expected for '[' and '] insted of #{count_spaces(@this_line)}", @line_number])
+     end
+   
+    elsif @this_line == " \n"
+    if count_spaces(@this_line) != 0
+      @error_messages.push(["Indentation 0 is expected for empty lines insted of #{count_spaces(@this_line)}", @line_number])
+    end
+   elsif @this_line != "\n"
+    @this_line
+    if count_spaces(@this_line) != 4
+      @error_messages.push(["Indentation 4 is expected for strings insted of #{count_spaces(@this_line)}", @line_number])
+    end
+  end
+  end
 
-
+  def count_spaces(line)
+    line=line.split("")
+   count = 0
+    line.each do |crt|
+      if crt == (' ') || crt == ("		")
+        count += 1
+      else
+        return count
+      end
+    end
+    count
+  end
 
 
 
