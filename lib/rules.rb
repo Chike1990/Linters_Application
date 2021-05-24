@@ -28,9 +28,18 @@ private
 
   def after_colon
     if @this_line.include? ':'
-      @error_messages.push(["Space is expected after ':'", @line_number]) unless @this_line[@this_line.index('  ') + 1] == " "
+      @this_line2 = @this_line.split("\"")
+      @this_line2.each_with_index do |split, i|
+        if split.include?(':') && !@this_line2[i+1].nil? && !split.include?('https')
+          next_split = split[split.index(':') + 1]
+          @error_messages.push(["Add space after ':'", @line_number]) if next_split  != " "
+        end
+      end
     end
   end
+
+
+
 =begin
   def after_comma
     if @this_line.include? ','
