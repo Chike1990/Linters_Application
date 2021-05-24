@@ -11,6 +11,7 @@ class Rules
 private
 
   def first_line
+    # p @this_line
     if @line_number == 1
       @error_messages.push(["'{' expected at the beginning of the line", @line_number]) unless @this_line[0] == '{'
     end
@@ -19,6 +20,9 @@ private
   def after_curly
     if @this_line.include? '{'
       @error_messages.push(["New line expected after '{'", @line_number]) unless @this_line[@this_line.index('{') + 1] == "\n"
+    end
+    if @this_line.include? '}'
+      @error_messages.push(["New line expected after '}'", @line_number]) unless @this_line[@this_line.index('}') + 1] == "\n"
     end
   end
 
