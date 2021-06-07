@@ -26,12 +26,11 @@ describe ErrorScanner do
   end
 
   describe 'after_comma' do
-    it 'returns [New line expected after ',', @line_number] ' do
+    it 'returns [New line expected after ', ', @line_number] ' do
       actual = '[File: ./samples/javascript_test_01.js], [Line: #1], [Error: Missing closing curly brace].'
       expect(error_scanner.checker_close_curlybrace_function).to eql(actual)
     end
   end
-
 
   describe 'after_square_bracket' do
     it '[New line expected after "[" and empty line is expected after "]," @line_number]' do
@@ -47,7 +46,6 @@ describe ErrorScanner do
     end
   end
 
-  
   describe 'indentation' do
     it '[New empty line expected before "}",@line_number]' do
       actual = '[File: ./samples/javascript_test_01.js], [Line: #1], [Error: Missing closing curly brace].'
