@@ -8,7 +8,7 @@ class Rules
     @error_messages = []
   end
 
-  private
+  #private
 
   def first_line
     if @line_number == (1) && @this_line[0] != '{'

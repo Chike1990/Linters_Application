@@ -1,6 +1,7 @@
 require './lib/rules'
 require 'colorize'
 
+
 Dir.glob('**/*.json').each do |file_name|
   file = File.read(file_name)
 
