@@ -83,7 +83,7 @@ class Rules
                               @line_number])
       end
     elsif @this_line != "\n"
-         if count_spaces(@this_line) != 4
+      if count_spaces(@this_line) != 4
         @error_messages.push(["Indentation 4 is expected for strings insted of #{count_spaces(@this_line)}",
                               @line_number])
       end
